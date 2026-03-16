@@ -144,7 +144,16 @@ tmp a.rs
 name Rust
 desc "Rust Code"
 comp 1
+[go]
+bin "c:/bin/go.bat run"
+tmp tmp.go
+name Go
+desc "Go Lang"
+pre "package main;"
+env "GOTMPDIR=C:\Temp"
 # END
+GOCACHE=C:\Temp\go-build"
+
 
 ruby:
 puts "Hello, World!"
@@ -178,3 +187,9 @@ int main()
 
 lua:
 print ("Hello, World!")
+
+go:
+import "fmt"
+func main() {
+    fmt.Println("Hello, world")
+}

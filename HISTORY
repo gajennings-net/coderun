@@ -1,0 +1,24 @@
+HISTORY
+
+16 Mar 2026
+
+Added support for Go Language.
+
+In File BIN.SH:
+
+    [go]
+    bin "go run"
+    tmp tmp.go
+    name Go
+    desc "Go Lang"
+    pre "package main;"
+
+In File CODERUN.CGI:
+
+    if [[ $env ]]; then
+        export "$env"
+    fi
+
+(Support for env was added for Go, but then Go wants more than one... So 
+instead of more code, I just decided to update the requirements that Go 
+needs a proper environment.)

@@ -46,6 +46,9 @@ bin_radio
 # EXEC
 if [[ $button == runcode && $data ]]; then
 	diag "$bin $tmp $args"
+	if [[ $env ]]; then
+		export "$env"
+	fi
 	if [[ $pre ]]; then
 		echo "$pre" > $tmp 		# NOTET
 		echo "$data" >> $tmp
@@ -56,6 +59,7 @@ if [[ $button == runcode && $data ]]; then
 		$bin $tmp $args
 		exit
 	fi
+	# EXEC
 	res=$($bin $tmp $args 2>err.txt)
 	if [[ $clean ]]; then
 		unlink $tmp
