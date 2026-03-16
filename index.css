@@ -1,0 +1,58 @@
+body {
+  font-family:'Courier New';
+  font-size:15px
+}
+
+pre {
+  margin:0; padding:0;
+  font-size:14px
+}
+
+section {
+  margin-bottom:10px
+}
+
+form {
+  margin-bottom:10px
+}
+
+textarea {
+  width:540px;
+  height:240px;
+  padding:1px 0px 1px 2px;
+  float:left;
+  overflow-y:scroll
+}
+
+button {
+  width:76px;
+  margin:2px 4px 0 0;
+  font-family:inherit;
+  font-size:inherit
+}
+
+input[type=text] {
+  width:186px;
+  margin:0px 2px 1px 0px;
+  padding:1px 0px 1px 3px;
+  font-family:inherit;
+  font-size:inherit
+}
+
+input[type="radio"] {
+  margin:3px 2px 3px 7px;
+  vertical-align:-2px
+}
+
+input[type="checkbox"] {
+  margin:3px 2px 3px 7px;
+  vertical-align:-3px
+}
+
+input#a {
+  margin-left:200px
+}
+
+.indent {
+  margin:3px 0px 2px 12px
+}

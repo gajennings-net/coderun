@@ -1,0 +1,63 @@
+Project CODERUNNER - Version One - 15 Mar 2026
+
+This is a CGI FORM for running Code. Languages supported for this first 
+release are:
+
+    Bash
+    PHP
+    Perl
+    Ruby
+    Python
+    Gcc
+    Lua
+    Rust
+
+There are literally dozens of online code running websites. Why one more?
+
+This is 1,000 lines of Bash and is for LOCALHOST.
+
+Notes
+
+I code in a really abusive style. Very little commenting but if you do not 
+understand the code than I am doing something wrong...
+
+(I use trailing ellipses as a comment, meaning, "this may be wrong".)
+
+The code is split into "modules" with three-letter names:
+
+   BAS          some basic functions everyone needs
+   BIN          the language binaries
+   CFG          configuration
+   HTM          the HTML
+   QRY          the Server Query data
+   SRV          the Server data
+
+And one oddball:
+
+   DIAG         for the diagnostic debugger thing I created which is separate
+
+I call this an "Experiment" for I am trying to write code that is all DATA 
+and tiny, little (redundant) algorithms that manipulate that DATA, trying to 
+not program in any traditional way...
+
+The code is (trying to be) self-configuring.
+
+Adding a Language
+
+In the BIN.SH module there are INI-like data for the languages; here are two:
+
+    [gcc]
+    bin gcc
+    tmp c.c
+    name C
+    desc "C Code"
+    comp 1
+    [php]
+    bin "php"
+    tmp php.tmp
+    name PHP
+    desc "PHP Code"
+    pre "<?php "
+
+Just keep adding: "comp" means it's a compiled language; "pre" is used as a 
+prefix added. Go can be added but it will be messy...

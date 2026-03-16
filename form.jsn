@@ -1,0 +1,14 @@
+# DATA
+{
+  "clean":"checked",
+  "below":"",
+  "only":"",
+  "args":"-v",
+  "diag":"checked",
+  "text":"",
+  "option":"sh",
+  "post":"",
+  "data":"while read -r k v; do\n  if [[ ${k:0:1} == \";\" ]]; then\n    continue\n  fi\n  echo \"$k=$v\"\ndone &lt;coderun.cfg\n",
+  "html":"",
+}
+# END

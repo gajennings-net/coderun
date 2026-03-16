@@ -1,0 +1,32 @@
+Project CODERUNNER - Version One - 15 Mar 2026
+
+This is a CGI FORM for running Code. 
+
+There is mainly a FORM. And some radio buttons to select the programming 
+language. And then a RUN button.
+
+That is all.
+
+The output is displayed below the HTML. There are several options. There is a 
+way to pass arguments (to the code, not the binaries).
+
+Requirements
+
+Any wanted language to use is expected to be be installed and available as a 
+single binary. And, of course, a LOCALHOST server able to run .cgi code in a 
+directory.
+
+Installation
+
+Just place all the code somewhere nice within your LOCALHOST server's space.
+
+Example
+
+    http://localhost/coderun/coderun.cgi
+
+Know Bugs
+
+The default is to display output after the HTML - there was supposed to be a 
+way to display the output before that HTML...
+
+Proble more.
