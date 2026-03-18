@@ -150,9 +150,7 @@ tmp tmp.go
 name Go
 desc "Go Lang"
 pre "package main;"
-env "GOTMPDIR=C:\Temp"
 # END
-GOCACHE=C:\Temp\go-build"
 
 
 ruby:
