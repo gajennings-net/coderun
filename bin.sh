@@ -98,7 +98,6 @@ return
 
 This contains the data (in INI-like format) for the known code running 
 programs, PHP, Bash, C, etc. Just put them here and it should work... 
-Languages like Go are different...
 
 # DATA
 [php]
@@ -145,7 +144,7 @@ name Rust
 desc "Rust Code"
 comp 1
 [go]
-bin "c:/bin/go.bat run"
+bin "go run"
 tmp tmp.go
 name Go
 desc "Go Lang"
