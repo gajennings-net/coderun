@@ -151,6 +151,7 @@ desc "Go Lang"
 pre "package main;"
 # END
 
+# this are them place for the hellos
 
 ruby:
 puts "Hello, World!"

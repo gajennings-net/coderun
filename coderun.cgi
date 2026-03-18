@@ -121,11 +121,20 @@ if [[ -f $Ef ]]; then
 		rm $Ef
 	fi
 fi
+
 exit
 
 # END
 
 # NOTES
+
+Oh, I should have called this project - The Executioner. For that's all it is. 
+You add the name of a binary in the data, and then form will be passed to that 
+binary. That is all.
+
+P.S. I can place commentary in the code like this because Bash does not see 
+them. (Your editor might squawk, but that's not my problem as I use one that 
+just highlights them in a funny way...
 
 # NOTET
 
