@@ -1,0 +1,95 @@
+CODALOGUE - Wherein I write about my journeys with this Experiment in the Shell.
+
+
+Code Log, 16 Mar 2026
+
+Trying to add Go Language. I installed the Go binary on a thumdrive, E:.
+
+Modifying File BIN.SH
+
+Added:
+
+    [go]
+    bin e:\bin\go\bin\go.exe
+    tmp go.tmp
+    name Go
+    desc "Go Lang"
+
+Result:
+
+    /srv/www/htdocs/coderun/coderun.cgi: line 60: e:\bin\go\bin\go.exe: command not found
+
+Forgot I'm Cygwin. Changed:
+
+   bin e:/bin/go/bin/go.exe
+
+Result:
+
+    go go.tmp: unknown command
+    Run 'go help' for usage.
+
+Forgot about the run command. Changed:
+
+    bin "e:/bin/go/bin/go.exe run"
+
+Result:
+
+    go: creating work dir: mkdir C:\WINDOWS\go-build128786080: Access is denied.
+
+Added (sloppily, just at the top of CODERUN.CGI):
+
+    export GOTMPDIR=C:/Temp
+
+Result:
+
+    no required module provides package go.tmp: go.mod file not found in current directory or any parent directory; see 'go help modules'
+
+Huh? Oh! Changed/Added:
+
+    tmp tmp.go
+
+Result:
+
+    tmp.go:1:7: expected 'package', found 'import'
+
+Added (to [bin]):
+
+    pre "package main\n"
+
+Result:
+
+    build cache is required, but could not be located: GOCACHE is not defined and %LocalAppData% is not defined
+
+Not so bad considering that *only data* has changed, and that most the work was 
+me being dumb!
+
+Added:
+
+    env "GOTMPDIR=C:/Temp GOCACHE=C:/Temp/go-build"
+
+In File CODERUN.CGI:
+
+    if [[ $env ]]; then
+        export "$env"
+    fi
+
+Result:
+
+    go: creating work dir: mkdir C:/Temp GOCACHE=C:/Temp/go-build\go-build1098004592: The filename, directory name, or volume label syntax is incorrect.
+
+And that's because I misinterpreted export's man page's "..."...
+
+So, I axed the env entry - but left in the code for it - and just made my 
+Go environment correct. So it's just:
+
+    [go]
+    bin "go run"
+    tmp tmp.go
+    name Go
+    desc "Go Lang"
+    pre "package main;"
+
+(All in all it took me ten times longer to write this code log than it did to 
+add Go support to the code.)
+
+--
