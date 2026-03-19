@@ -102,50 +102,50 @@ programs, PHP, Bash, C, etc. Just put them here and it should work...
 # DATA
 [php]
 bin "php"
-tmp php.tmp
+type php
 name PHP
 desc "PHP Code"
 pre "<?php "
 [sh]
 bin sh
-tmp sh.tmp
+type sh
 name Bash
 desc "Shell script"
 [perl]
 bin perl
-tmp pl.tmp
+type pl
 name Perl
 desc "Perl script"
 [ruby]
 bin ruby
-tmp rb.tmp
+type rb
 name Ruby
 desc "Ruby Code"
 [python]
 bin python
-tmp py.tmp
+type py
 name Python 
 desc "Python Code"
 [lua]
 bin lua
-tmp lua.tmp
+type lua
 name Lua
 desc "Lua Script"
 [gcc]
 bin gcc
-tmp c.c
+type c
 name C
 desc "C Code"
 comp 1
 [rust]
 bin rustc
-tmp a.rs
+type rs
 name Rust
 desc "Rust Code"
 comp 1
 [go]
 bin "go run"
-tmp tmp.go
+type go
 name Go
 desc "Go Lang"
 pre "package main;"

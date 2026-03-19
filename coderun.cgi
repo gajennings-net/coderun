@@ -1,7 +1,7 @@
 #!/bin/bash 
 # This is Code Runner, the localhost code runner; or, Experiment in the Shell.
 # Copyright 2026 g.a.jennings
-VER=1.0
+VER=1.1
 PROG=coderun.cgi
 if [[ ${BASH_SOURCE[@]} != $PROG ]]; then
 	Ef=ERR.log
@@ -38,17 +38,15 @@ fi
 
 # WHICH BIN
 bin_option
-if [[ -z $button ]]; then
-	diag "bin: $bin"
-fi
 bin_radio
+diag "$bin, $type, $args"
 
 # EXEC
 if [[ $button == runcode && $data ]]; then
-	diag "$bin $tmp $args"
 	if [[ $env ]]; then
 		export "$env"
 	fi
+	tmp=$type.tmp
 	if [[ $pre ]]; then
 		echo "$pre" > $tmp 		# NOTET
 		echo "$data" >> $tmp
@@ -90,6 +88,7 @@ if [[ $data ]]; then
 		 data+=$'\n'
 	fi
 fi
+
 htm 'FORM'
 echo "<pre>"
 
@@ -128,13 +127,15 @@ exit
 
 # NOTES
 
-Oh, I should have called this project - The Executioner. For that's all it is. 
-You add the name of a binary in the data, and then form will be passed to that 
-binary. That is all.
+Oh, I should have called this project - The Executioner. For that's all it is: 
+You add the name of a binary in BIN.SH, and the form data will be passed to 
+that binary as a temporary file. That is all.
 
 P.S. I can place commentary in the code like this because Bash does not see 
 them. (Your editor might squawk, but that's not my problem as I use one that 
-just highlights them in a funny way...
+just highlights them in a funny way...)
+
+P.P.S. I use Cygwin/Windows and Visual Studio Code. It works.
 
 # NOTET
 

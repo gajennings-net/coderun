@@ -1,6 +1,5 @@
 form.jsn
-tmp.cgi
-tmp.sh
+tmp.*
 *.tmp
 *.log
 *.DAT

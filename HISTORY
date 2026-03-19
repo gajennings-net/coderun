@@ -1,5 +1,11 @@
 HISTORY
 
+19 Mar 2026
+
+Changed BIN.SH data "tmp" to "type" (filename type), and added in CORERUN.CGI:
+
+    $tmp=$type.tmp
+
 16 Mar 2026
 
 Added support for Go Language.
