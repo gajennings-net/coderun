@@ -3,6 +3,8 @@
 # Copyright 2026 g.a.jennings
 HTM=1.0
 
+EOL=$'\n'
+
 # SEE ALSO QRY.SH*
 # SEE ALSO BIN.SH
 
@@ -23,17 +25,6 @@ function bin_radio {
 	done
 }
 
-# CHECKBOXES: SET
-function c_checked {
-	local c
-	for c in ${!checkbox[@]}; do
-		declare -n v=$c
-		if [[ $v == on ]]; then
-			declare -g $c=checked
-		fi
-	done
-}
-
 # CHECKBOXES: MAKE
 function c_output {
 	local c t s
@@ -43,28 +34,29 @@ function c_output {
 		if [[ $v == on ]]; then
 			declare -g $c=checked
 		fi
-		s+="<span title='$t'><input type='checkbox' $v name='$c' />$c</span>"
+		s+="<span title='$t'><input type='checkbox' $v name='$c' />$c</span>$EOL"
 	done
 	BOX_OPTIONS=$s
 }
 
-# RADIO: OPTION
+# RADIO: MAKE
 function r_output {
-	local r t s
+	local r s t v
 	for r in ${!radio[@]}; do
 		declare -n v=$r
 		t=${radio[$r]}
 		if [[ $r == $option ]]; then
-			declare v=checked
+			v=checked
 		else
-			declare v=""
+			v=""
 		fi
 		# TITLE, [CHECKED], VALUE=NAME, (NAME)
-		s+="<span title='$t'><input type='radio' name='option' $v value='$r'>$r</span>"
+		s+="<span title='$t'><input type='radio' name='option' $v value='$r'>$r</span>$EOL"
 	done
 	RAD_OPTIONS=$s
 }
 
+# module entry
 htm() {
 	case $1 in
 	HEAD)
