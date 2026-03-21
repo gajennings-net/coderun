@@ -1,7 +1,7 @@
 # HTM.SH - The HTML Data.
 # Part of coderun.cgi, the localhost code runner; or, Experiment in the Shell.
 # Copyright 2026 g.a.jennings
-HTM=1.0
+HTM=1.12
 
 EOL=$'\n'
 
@@ -12,6 +12,8 @@ EOL=$'\n'
 # radio is match to BIN.SH and option 		# NOTEC
 declare -A radio
 declare -A checkbox
+declare -a select
+select=(tmp.*)
 
 # CHECKBOXES
 cfg_read htm.sh
@@ -41,7 +43,7 @@ function c_output {
 
 # RADIO: MAKE
 function r_output {
-	local r s t v
+	local r s t v n=1
 	for r in ${!radio[@]}; do
 		declare -n v=$r
 		t=${radio[$r]}
@@ -52,11 +54,33 @@ function r_output {
 		fi
 		# TITLE, [CHECKED], VALUE=NAME, (NAME)
 		s+="<span title='$t'><input type='radio' name='option' $v value='$r'>$r</span>$EOL"
+		if (( ! ( n % 8 ) )); then
+			s+="<br>"
+		fi
+		(( n++ ))
 	done
 	RAD_OPTIONS=$s
 }
 
-# module entry
+# SELECT: MAKE HTML [name] [none]
+function s_output {
+	local o t s v
+	if [[ $2 ]]; then
+		s+="<option none> </option>$EOL"
+	fi
+	for o in ${select[@]}; do
+		t=${o:4}
+		if [[ $t == $type ]]; then
+			v=selected
+		else
+			v=""
+		fi
+		s+="<option $v $o>$o</option>$EOL"
+	done
+	SEL_OPTIONS=$s
+}
+
+# MODULE ENTRY
 htm() {
 	case $1 in
 	HEAD)
@@ -73,14 +97,19 @@ htm() {
 	FORM)
 	c_output
 	r_output
-	echo "<div style='float:left'><b><a href="">$INDEX</a> v$VER</b></div>
+	s_output tmpfile none
+	echo "<div><b><a href="">$INDEX</a> v$VER</b></div>
 <form method='post' action='?'>
-<input id='a' type='text' name='args' title='code' value='$args' />arguments
-<br>
 <textarea name='data'>$data</textarea>
-$RAD_OPTIONS
+$RAD_OPTIONS<br />
+<input type='text' name='args' title='arguments to code' placeholder='arguments' value='$args' /><br />
+<select name='tmpfile' title='temporary language files'>
+$SEL_OPTIONS
+</select><br />
+<button title='load temporary file for language previously used' name='button' value='load'>load</button><br />
+<button title='load code example for selected language' name='button' value='new'>new</button>
 <br style='clear:both;' />
-<button title='run the code' name='button' value='runcode'>run</button>
+<button style='margin-left:0;' title='run the code for the selected language' name='button' value='runcode'>run</button>
 $BOX_OPTIONS
 </form>
 <span id=message>$message</span>
@@ -100,11 +129,6 @@ return
 
 The "matching" of radio (button) data and the BINs data should be done via 
 the CONFIG MAPPING MODULE (yet to be designed).
-
-# NOTED
-
-The chackbox array is to be created by this via code in CFG. (And then the 
-code is going to be rewritten.)
 
 # DATA
 [checkbox]

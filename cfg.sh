@@ -174,7 +174,7 @@ return
 
 All the "file readers" are unforgiving (no error handlers) and expect proper 
 formatting: no leading spaces; no tabs; no trailing comments; etc. Blank lines 
-are generally okay. Only the CFG fomrat used commented lines. This is so that 
+are generally okay. Only the CFG format uses commented lines. This is so that 
 Bash Parameter Expansion is all that is needed to parse the data.
 
 CFG format (read_cfg)

@@ -1,12 +1,12 @@
 # SRV.SH - Server Stuff.
 # Part of coderun.cgi, the localhost code runner; or, Experiment in the Shell.
 # Copyright 2026 g.a.jennings
-SRV=1.0
+SRV=1.1
 
 SCNT="text/html; charset=UTF-8"
 SPBY="BASH/${BASH_VERSION%(*}"
 
-INDEX=${s:=${0##*/}}
+INDEX=${0##*/}
 : ${HTTP_HOST:=localhost}
 : ${SERVER_NAME:=${HTTP_HOST}}
 : ${REQUEST_URI:=${PWD//"/srv/www/htdocs"/}/$INDEX}
@@ -28,25 +28,10 @@ function header {
 	echo ""
 }
 
-if [[ $SRV_HEADER ]]; then
-	header
-	if [[ $SRV_PLACE ]]; then		# NOTED
-		cat <<HTM
-<!--
-$INDEX, $REQUEST_URI, 
--->
-HTM
-	fi
-fi
-
 return
 
 # END
 
 # NOTES
 
-Not all the data defined here are used.
-
-# NOTED
-
-The Colossal Debugger
+Not all the data defined here are used. (This module not really needed, but...)

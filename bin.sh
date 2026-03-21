@@ -1,7 +1,7 @@
 # BIN.SH - The DATA for the binaries; self configuring. See NOTES.
 # Part of coderun.cgi, the localhost code runner; or, Experiment in the Shell.
 # Copyright 2026 g.a.jennings
-BIN=1.0
+BIN=1.2
 
 # EXTERNAL DATA
 if [[ -z $option ]]; then
@@ -57,8 +57,6 @@ function bin_option {
 }
 
 bin_read
-
-# END
 
 # TEST
 
@@ -116,6 +114,11 @@ bin perl
 type pl
 name Perl
 desc "Perl script"
+[bat]
+bin "cmd /C"
+type bat
+name Batch
+desc "Batch File"
 [ruby]
 bin ruby
 type rb
@@ -137,57 +140,28 @@ type c
 name C
 desc "C Code"
 comp 1
+[cpp]
+bin g++
+type cc
+name C++
+desc "C Plus Plus"
+comp 1
 [rust]
 bin rustc
 type rs
 name Rust
 desc "Rust Code"
 comp 1
+exe tmp.exe
 [go]
 bin "go run"
 type go
 name Go
 desc "Go Lang"
 pre "package main;"
+[zsh]
+bin zsh
+type zsh
+name Zsh
+desc "Z Shell"
 # END
-
-# this are them place for the hellos
-
-ruby:
-puts "Hello, World!"
-
-python:
-print("Hello, World!")
-
-perl:
-print "Hello, World!";
-
-c:
-#include <stdio.h>
-int main()
-{
-    printf("Hello, World!");
-}
-
-rust:
-fn main() {
-    println!("Hello, world!");
-}
-
-g++:
-#include <iostream>
-using namespace std;
-int main() 
-{
-    cout << "Hello, World!";
-    return 0;
-}
-
-lua:
-print ("Hello, World!")
-
-go:
-import "fmt"
-func main() {
-    fmt.Println("Hello, world")
-}

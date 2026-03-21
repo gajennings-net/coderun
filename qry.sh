@@ -1,9 +1,9 @@
 # QRY.SH - The Query Data.
 # Part of coderun.cgi, the localhost code runner; or, Experiment in the Shell.
 # Copyright 2026 g.a.jennings
-QRY=1.0
+QRY=1.1
 
-Qa=(option post data button text below args html diag only clean)
+Qa=(option data button tmpfile text below args html diag only clean)
 
 declare -A _GET
 declare -A _POST
@@ -39,7 +39,7 @@ if [[ $Qa ]]; then
 	IFS=$I
 fi
 
-if [[ ! -n $_NOPOST ]]; then
+if [[ -n $(declare -p _POST 2> /dev/null) ]]; then
 	I=$IFS
 	IFS='&'
 	for q in $POST_STRING; do
@@ -76,8 +76,8 @@ query() {
 
 if [[ ${BASH_ARGV[@]} =~ -t ]]; then
 	echo "${_GET[@]}"
-#	echo "${_GET[@]}"
-#	query
+	echo "${_POST[@]}"
+	query
 fi
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
@@ -86,9 +86,16 @@ fi
 
 return
 
+# END 
+
 # NOTES
 
-#DATA
+The Qa data are not really needed. It was derived from code that had to 
+sanitize inputs. Here we can just set all the POST data as globals - all that 
+need be done is careful naming of all the variables used. (Of course there is a 
+point where there can be too many variables. Ain't there just yet...)
+
+# DATA
 [data]
 option
 post

@@ -1,5 +1,26 @@
 HISTORY
 
+21 Mar 2026
+
+Good Enough to be called v2.0. (Though I am lax when it comes to really 
+tracking the version/changes.)
+
+Major changes (CODERUN.CGI) for more supporting more compiled languages; added 
+"NEW" and "LOAD" commands to include language examples code and loading code 
+from the temporary files. Cleaned-up the inerface.
+
+Added
+
+    DAT.SH: Holds data for default language examples.
+
+Changed
+
+    BIN.SH      Added some language DATA.
+    CFG.SH      Removed some unused code.
+    QRY.SH      "
+    SRV.SH      "
+    HTM.SH      Re-designed the HTML for clarity.
+
 19 Mar 2026
 
 Changed BIN.SH data "tmp" to "type" (filename type), and added in CORERUN.CGI:
