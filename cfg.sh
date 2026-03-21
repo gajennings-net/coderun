@@ -91,58 +91,6 @@ function dump_jsn {
 	echo "}" 
 }
 
-# PARSE THE INI DATA of a FILE
-function read_inif {
-	local l i k v
-	exec {fd}<$1
-	while read -r -u$fd l; do
-		if [[ $l == "# DATA" ]]; then
-			break
-		fi
-	done
-	while read -r -u$fd l; do
-		if [[ $l == "" ]]; then
-			continue
-		fi
-		if [[ $l == "# END" ]]; then
-			break
-		fi
-		if [[ "${l:0:1}" == "[" ]]; then
-			i=${l:1:-1}
-			inis+=($i)
-			declare -A $i
-			continue
-		fi
-		k=${l%%=*}; v=${l#*=}
-		k=${k%% *}; v=${v#* }
-		declare -n r="$i"
-		r[$k]="$v"
-	done
-	exec {fd}<&-
-}
-
-# PARSE INI FILE
-function read_ini {
-	local l i k v
-	while read -r l; do
-		if [[ $l == "" ]]; then
-			continue
-		fi
-		if [[ "${l:0:1}" == "[" ]]; then
-			i=${l:1:-1}
-			inis+=($i)
-			declare -g -A $i
-#echo "[$i]"
-			continue
-		fi
-		k=${l%%=*}; v=${l#*=};
-		k=${k%% *}; v=${v#* };
-#echo "$k=$v,($l)"
-		declare -n r="$i"
-		r[$k]="$v"
-	done <$1
-}
-
 # READ CFG FILE into Globals
 function read_cfg {
 	local k v
@@ -199,18 +147,6 @@ function cfg_read {
 
 # TEST
 
-if [[ ${BASH_ARGV[@]} =~ -i ]]; then
-echo "[ini]
-A = 1
-B = 3
-" > TEMP.INI
-	read_ini TEMP.INI
-	for i in "${!ini[@]}"; do
-		echo "$i=${ini[$i]}"
-	done
-	unlink TEMP.INI
-fi
-
 if [[ ${BASH_ARGV[@]} =~ -j ]]; then
 	read_jsn $0
 	echo "${!jsn[@]}:${jsn[@]}"
@@ -223,7 +159,9 @@ fi
 if [[ ${BASH_ARGV[@]} =~ -c ]]; then
 #	declare -A coderun		# this is nice but not required
 	read_cfga coderun.cfg
-	echo "${coderun[@]}"
+	for i in "${!coderun[@]}"; do
+		echo "$i = ${coderun[$i]}"
+	done
 fi
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
