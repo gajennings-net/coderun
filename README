@@ -21,7 +21,8 @@ Notes
 I code in a really abusive style. Very little commenting but if you do not 
 understand the code than I am doing something wrong...
 
-(I use trailing ellipses as a comment, meaning, "this may be wrong".)
+(I use trailing ellipses as a comment, meaning, "this may be wrong", but also, 
+"more here later". *sigh*)
 
 The code is split into "modules" with three-letter names:
 
@@ -40,7 +41,9 @@ I call this an "Experiment" for I am trying to write code that is all DATA
 and tiny, little (redundant) algorithms that manipulate that DATA, trying to 
 not program in any traditional way...
 
-The code is (trying to be) self-configuring.
+The code is (trying to be) self-configuring. (I also say that the code is self-
+documenting, but it is not by the typical definition of self-documenting code. 
+Sorry, I will not comform.)
 
 Adding a Language
 
@@ -60,4 +63,28 @@ In the BIN.SH module there are INI-like data for the languages; here are two:
     pre "<?php "
 
 Just keep adding: "comp" means it's a compiled language; "pre" is used as a 
-prefix added. Go can be added but it will be messy...
+prefix added. Go it turns out is just another entry:
+
+    [go]
+    bin "go run"
+    tmp tmp.go
+    name Go
+    desc "Go Lang"
+    pre "package main;"
+
+One just must have all the Go environment variables set.
+
+Oh, right. The use of a input radio's for the languages is short-sighted and 
+not suitable for growth...
+
+The Colossal Debugger
+
+Included is the Colossal Debugger, "echoe":
+
+    function echoe {
+        echo "$*"
+    }
+
+Which, when a bug is suspected, you pillferate the code with. When the bug is 
+found, you do a search and delete on all the Colassal Debugger calls!
+
