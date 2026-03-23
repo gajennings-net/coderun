@@ -10,9 +10,9 @@ fi
 declare "option_$option"=checked
 
 # MODULE DATA
-
 declare -a bins
 
+# MODULE API
 function bin_read {
 	local l b k v
 	exec {fd}<${BASH_SOURCE[0]}
@@ -56,10 +56,7 @@ function bin_option {
 #echo "$bin, $tmp, $name, $desc etc."
 }
 
-bin_read
-
 # TEST
-
 function bin_show {
 	local a b
 	for a in ${bins[@]}; do
@@ -76,7 +73,6 @@ function bin_show {
 }
 
 # RUN TIME
-
 if [[ ${BASH_ARGV[@]} =~ -s ]]; then
 	bin_show
 fi
@@ -95,7 +91,8 @@ return
 # NOTES
 
 This contains the data (in INI-like format) for the known code running 
-programs, PHP, Bash, C, etc. Just put them here and it should work... 
+programs, PHP, Bash, C, etc. Just put them here and it should work... (I 
+suppose an external file would be nice  but I don't know if it'd be better...)
 
 # DATA
 [php]

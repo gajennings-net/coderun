@@ -1,5 +1,19 @@
 HISTORY
 
+23 Mar 2026
+
+Fixed
+
+    CODERUN.CGI tests the run/compile error file not just for existence but for 
+    esisting and non-zero size.
+
+Changed
+
+    Moved all the calls to the Modules/API into CODERUN.CGI.
+    Moved CFG configuration functionality into DAT.SH. (Form data save/load 
+    still in CFG.SH).
+    
+
 21 Mar 2026
 
 Good Enough to be called v2.0. (Though I am lax when it comes to really 

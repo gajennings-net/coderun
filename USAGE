@@ -1,4 +1,4 @@
-Project CODERUNNER - Version One - 15 Mar 2026
+Project CODERUNNER - Version 2.2 - 23 Mar 2026
 
 This is a CGI FORM for running Code. 
 
@@ -12,9 +12,9 @@ way to pass arguments (to the code, not the binaries).
 
 Requirements
 
-Any wanted language to use is expected to be be installed and available as a 
-single binary. And, of course, a LOCALHOST server able to run .cgi code in a 
-directory.
+Any wanted language to be used is expected to be be installed and available as 
+a single binary, and configured in in the source - BIN.SH. And, of course, a 
+LOCALHOST server able to run .cgi code in a directory.
 
 Installation
 
@@ -24,9 +24,6 @@ Example
 
     http://localhost/coderun/coderun.cgi
 
-Know Bugs
+Known Bugs
 
-The default is to display output after the HTML - there was supposed to be a 
-way to display the output before that HTML...
-
-Proble more.
+Some of the output options are no implemented.

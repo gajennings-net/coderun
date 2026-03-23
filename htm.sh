@@ -5,20 +5,13 @@ HTM=1.12
 
 EOL=$'\n'
 
-# SEE ALSO QRY.SH*
-# SEE ALSO BIN.SH
-
 # FORM DATA 
-# radio is match to BIN.SH and option 		# NOTEC
 declare -A radio
 declare -A checkbox
 declare -a select
 select=(tmp.*)
 
-# CHECKBOXES
-cfg_read htm.sh
-
-# BIN to RADIOs
+# BINs to RADIOs
 function bin_radio {
 	declare -n r=radio
 	for a in ${bins[@]}; do
@@ -125,15 +118,18 @@ return
 
 # NOTES
 
-# NOTEC
-
 The "matching" of radio (button) data and the BINs data should be done via 
 the CONFIG MAPPING MODULE (yet to be designed).
 
-# DATA
+# NOTEG
+
+This (reading checkboxes from data at the end of this file) is Goofy. But there 
+is/was a point to it. 1) During creation I wanted to have both inline DATA and 
+a configuration file - this allowed for that; 2) And it stuck.
+
+# DATA TYPE=CFG
 [checkbox]
 diag "enable diagnostics"
-raw "run code only"
 text "result into textarea"
 below "output below form"
 html "output is HTML"

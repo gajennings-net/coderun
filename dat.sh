@@ -1,7 +1,7 @@
 # DAT.SH - Configuration Functions - to be merged with CFG.SH.
 # Part of coderun.cgi, the localhost code runner; or, Experiment in the Shell.
 # Copyright 2026 g.a.jennings
-DAT=1.0
+DAT=1.1
 
 TYP=(JSN COD CFG)
 if [[ -z $BAS ]]; then
@@ -33,7 +33,7 @@ function read_COD {
 		if [[ $l =~ ^"# END" ]]; then
 			break
 		fi
-		if [[ "${l: -1}" == ":" && ! $l =~ " " ]]; then
+		if [[ "${l: -1}" == ":" && ! $l =~ " " ]]; then	# *
 			if [[ $s ]]; then
 				code[$k]=$s
 				s=
@@ -47,6 +47,7 @@ function read_COD {
 		code[$k]=$s
 	fi
 }
+# * Fucking Python... And labels will need a comment... And???
 
 # READ JSN DATA in $jsn
 function read_JSN {
@@ -77,9 +78,52 @@ function read_JSN {
 	done
 }
 
-# LOAD
+# READ CFG DATA of file to Global
+function read_CFG {
+	local l b k v
+	while read -r -u$1 l; do
+		if [[ $l == "" ]]; then
+			continue
+		fi
+		if [[ $l =~ ^"# END" ]]; then
+			break
+		fi
+		if [[ "${l:0:1}" == "[" ]]; then
+			b=${l:1:-1}
+			declare -g -A $b
+			continue
+		fi
+		k=${l%% *}; v=${l#* }; v=${v%\"}; v=${v#\"}
+		declare -g -n r=$b
+		r[$k]="$v"
+	done
+}
 
-read_data dat.sh
+# READ CFG FILE into Globals
+# ALT # NUY
+function read_cfg {
+	local k v
+	while read -r k v; do
+		if [[ ${k:0:1} == ";" ]]; then
+			continue
+		fi
+		declare -g $k=$v
+	done <$1
+}
+
+# READ CFG FILE into a named array (based on filename)
+# ALT # NUY # read_cfga coderun.cfg
+function read_cfga {
+	local k v
+	declare -g -A ${1%.*}
+	local -n cfg=${1%.*}
+	while read -r k v; do
+		if [[ ${k:0:1} == ";" ]]; then
+			continue
+		fi
+		cfg[$k]=$v
+	done <$1
+}
 
 # END
 
@@ -87,9 +131,6 @@ read_data dat.sh
 
 if [[ ${BASH_ARGV[@]} =~ -c ]]; then
 	echo "${!code[@]}"
-fi
-
-if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
 	exit
 fi
 
@@ -97,10 +138,15 @@ return
 
 # NOTES
 
-This will be merged into CFG.SH, but as wih most of the code it's Good Enough 
-for Now...
+All the "file readers" are unforgiving (no error handlers) and expect proper 
+formatting: no leading spaces; no tabs; no trailing comments; etc. Blank lines 
+are generally okay. Only the CFG format uses commented lines. This is so that 
+Bash Parameter Expansion is all that is needed to parse the data.
 
-Here are all the "NEW" choices:
+# NOTED
+
+Here are all the "NEW" choices (I think display arguments is far better way of 
+introducing code than hello world...):
 
 # DATA type=COD
 gcc:

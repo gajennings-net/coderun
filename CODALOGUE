@@ -1,5 +1,15 @@
 CODALOGUE - Wherein I write about my journeys with this Experiment in the Shell.
 
+(NOTE: This is *non-important* commentary.)
+
+
+Code Log, 23 Mar 2026
+
+This "code" is 50 lines of CODERUN.CGI - the "# EXEC" block. The rest is just 
+DATA. The most important thing is that there are two sets of global variables 
+that need to be understood: 1) variables from the FORM (HTM.SH) - $button, 
+$option, $diag; 2) variables from the BIN data (BIN.SH) - $bin, $comp, $type.
+
 
 Code Log, 16 Mar 2026
 
