@@ -11,6 +11,13 @@ declare -A checkbox
 declare -a select
 select=($TEMP/tmp.*)
 
+checkbox[diag]="enable diagnostics"
+checkbox[text]="result into textarea"
+checkbox[below]="output below form"
+checkbox[html]="output is HTML"
+checkbox[only]="only display output"
+checkbox[clean]="clean temp files"
+
 # BINs to RADIOs
 function bin_radio {
 	declare -n r=radio
@@ -20,123 +27,9 @@ function bin_radio {
 	done
 }
 
-# CHECKBOXES: MAKE
-function c_output {
-	local c t s
-	for c in ${!checkbox[@]}; do
-		declare -n v=$c
-		t=${checkbox[$c]}
-		if [[ $v == on ]]; then
-			declare -g $c=checked
-		fi
-		s+="<span title='$t'><input type='checkbox' $v name='$c' />$c</span>$EOL"
-	done
-	BOX_OPTIONS=$s
-}
-
-# RADIO: MAKE
-function r_output {
-	local r s t v n=1
-	for r in ${!radio[@]}; do
-		declare -n v=$r
-		t=${radio[$r]}
-		if [[ $r == $option ]]; then
-			v=checked
-		else
-			v=""
-		fi
-		# TITLE, [CHECKED], VALUE=NAME, (NAME)
-		s+="<span title='$t'><input type='radio' name='option' $v value='$r'>$r</span>$EOL"
-		if (( ! ( n % 8 ) )); then
-			s+="<br>"
-		fi
-		(( n++ ))
-	done
-	RAD_OPTIONS=$s
-}
-
-# SELECT: MAKE HTML [name] [none]
-function s_output {
-	local o t s v
-	if [[ $2 ]]; then
-		s+="<option none> </option>$EOL"
-	fi
-	for o in ${select[@]}; do
-		t=${o:4}
-		if [[ $t == $type ]]; then
-			v=selected
-		else
-			v=""
-		fi
-		s+="<option $v $o>$o</option>$EOL"
-	done
-	SEL_OPTIONS=$s
-}
-
-# MODULE ENTRY
-htm() {
-	case $1 in
-	HEAD)
-	echo "<!DOCTYPE html>
-<html lang='en'>
-<head>
-<title>$INDEX $VER</title>
-<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
-<link href="index.css" rel="stylesheet" type="text/css">
-</head>
-<body id=''>
-"
-	;;
-	FORM)
-	c_output
-	r_output
-	s_output tmpfile none
-	echo "<div><b><a href="">$INDEX</a> v$VER</b></div>
-<form method='post' action='?'>
-<textarea name='data'>$data</textarea>
-$RAD_OPTIONS<br />
-<input type='text' name='args' title='arguments to code' placeholder='arguments' value='$args' />
-<br />
-<select name='tmpfile' title='temporary language files'>
-$SEL_OPTIONS
-</select><br />
-<button title='load temporary file for language previously used' name='button' value='load'>load</button><br />
-<button title='load code example for selected language' name='button' value='new'>new</button><br />
-<button title='save textarea' name=button value=save>save</button><input type='text' name='savfile' title='save file' value='$savfile' />
-<br style='clear:both;' />
-<button style='margin-left:0;' title='run the code for the selected language' name='button' value='runcode'>run</button>
-$BOX_OPTIONS
-</form>
-<span id=message>$message</span>
-<hr />
-"
-	;;
-	esac
-}
-
 return
 
 # END
 
 # NOTES
 
-The "matching" of radio (button) data and the BINs data should be done via 
-the CONFIG MAPPING MODULE (yet to be designed).
-
-P.S. Inline HTML ain't cool. *sigh*
-
-# NOTEG
-
-This (reading checkboxes from data at the end of this file) is Goofy. But there 
-is/was a point to it. 1) During creation I wanted to have both inline DATA and 
-a configuration file - this allowed for that; 2) And it stuck.
-
-# DATA TYPE=CFG
-[checkbox]
-diag "enable diagnostics"
-text "result into textarea"
-below "output below form"
-html "output is HTML"
-only "only display output"
-clean "clean temp files"
-# END

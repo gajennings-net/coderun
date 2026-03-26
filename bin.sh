@@ -92,7 +92,7 @@ return
 
 This contains the data (in INI-like format) for the known code running 
 programs, PHP, Bash, C, etc. Just put them here and it should work... (I 
-suppose an external file would be nice  but I don't know if it'd be better...)
+suppose an external file would be nice, but I don't know if it'd be better - probably. Certainly it would be the *normal* thing to do...)
 
 # DATA
 [php]

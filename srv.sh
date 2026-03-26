@@ -3,18 +3,18 @@
 # Copyright 2026 g.a.jennings
 SRV=1.1
 
-SCNT="text/html; charset=UTF-8"
 SPBY="BASH/${BASH_VERSION%(*}"
+SCNT="text/html; charset=UTF-8"
 
 export LANG=$LANG
 export LC_ALL=$LANG
 
 INDEX=${0##*/}
 : ${HTTP_HOST:=localhost}
-: ${SERVER_NAME:=${HTTP_HOST}}
-: ${REQUEST_URI:=${PWD//"/srv/www/htdocs"/}/$INDEX}
-: ${SCRIPT_NAME:=$REQUEST_URI}
 : ${REMOTE_ADDR:=127.0.0.1}
+: ${SERVER_NAME:=${HTTP_HOST}}
+: ${SCRIPT_NAME:=$REQUEST_URI}
+: ${REQUEST_URI:=${PWD//"/srv/www/htdocs"/}/$INDEX}
 : ${HTTP_USER_AGENT:=Mozilla/5.0 (X11; Linux x86_64)}
 REQUEST_URI=${REQUEST_URI%%\?*}
 REQUEST_URI=${REQUEST_URI//$INDEX/}

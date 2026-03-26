@@ -126,9 +126,7 @@ if [[ $data ]]; then
 	fi
 fi
 
-read_data htm.sh			# see HTM.SH NOTEG
-htm 'HEAD'
-htm 'FORM'
+. ./HTML.sh
 echo "<pre>"
 
 # OUPUT
