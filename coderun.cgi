@@ -7,6 +7,7 @@ FORM=form.jsn
 TEMP=tmp
 ERRL=err.log
 ERRF=err.txt
+LANG=en_US.UTF-8
 if [[ ${BASH_SOURCE[@]} != $PROG ]]; then
 	exec 2>$ERRL
 fi
@@ -183,7 +184,7 @@ order to the includes - well, for BAS.SH...
 # NOTET
 
 Probably should make the temporary file(s) in TEMPDIR? Naaah. (Kinda messes 
-with IDEs though.)
+with IDEs though so created a directory here.)
 
 # NOTED
 

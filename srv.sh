@@ -6,8 +6,8 @@ SRV=1.1
 SCNT="text/html; charset=UTF-8"
 SPBY="BASH/${BASH_VERSION%(*}"
 
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
+export LANG=$LANG
+export LC_ALL=$LANG
 
 INDEX=${0##*/}
 : ${HTTP_HOST:=localhost}
