@@ -1,14 +1,14 @@
 # DAT.SH - Configuration Functions - to be merged with CFG.SH.
 # Part of coderun.cgi, the localhost code runner; or, Experiment in the Shell.
 # Copyright 2026 g.a.jennings
-DAT=1.1
+DAT=2.0
 
 TYP=(JSN COD CFG)
 if [[ -z $BAS ]]; then
 	. ./bas.sh
 fi
 
-# READ DATA from $1 to array name $2
+# READ DATA from $1 to array by type
 function read_data {
 	local fd l k v
 	exec {fd}<$1
@@ -49,7 +49,7 @@ function read_COD {
 }
 # * Fucking Python... And labels will need a comment... And???
 
-# READ JSN DATA in $jsn
+# READ JSN DATA into $jsn
 function read_JSN {
 	local l k v
 	declare -g -A jsn
@@ -78,7 +78,7 @@ function read_JSN {
 	done
 }
 
-# READ CFG DATA of file to Global
+# READ CFG DATA of file to named Globals
 function read_CFG {
 	local l b k v
 	while read -r -u$1 l; do
@@ -116,12 +116,12 @@ function read_cfg {
 function read_cfga {
 	local k v
 	declare -g -A ${1%.*}
-	local -n cfg=${1%.*}
+	local -n r=${1%.*}
 	while read -r k v; do
 		if [[ ${k:0:1} == ";" ]]; then
 			continue
 		fi
-		cfg[$k]=$v
+		r[$k]=$v
 	done <$1
 }
 
