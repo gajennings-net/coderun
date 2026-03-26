@@ -1,7 +1,7 @@
 # CFG.SH - Configuration Functions: JSN, INI, EOF.
 # Part of coderun.cgi, the localhost code runner; or, Experiment in the Shell.
 # Copyright 2026 g.a.jennings
-CFG=1.0
+CFG=2.0
 
 if [[ -z $BAS ]]; then
 	. ./bas.sh

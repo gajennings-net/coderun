@@ -1,11 +1,14 @@
 #!/bin/bash 
 # This is Code Runner, the localhost code runner; or, Experiment in the Shell.
 # Copyright 2026 g.a.jennings
-VER=2.2
+VER=2.4
 PROG=coderun.cgi
+FORM=form.jsn
+TEMP=tmp
+ERRL=err.log
+ERRF=err.txt
 if [[ ${BASH_SOURCE[@]} != $PROG ]]; then
-	Ef=ERR.log
-	exec 2>$Ef
+	exec 2>$ERRL
 fi
 
 . ./diag.sh
@@ -24,12 +27,26 @@ header
 # FIRST LOAD
 if [[ -z $button ]]; then
 	if [[ -f form.jsn ]]; then
-		read_jsn form.jsn
+		read_jsn $FORM
 		for a in ${!jsn[@]}; do
 			v=${jsn[$a]}
 			declare $a="$v"
 		done
 		unset a
+	fi
+fi
+
+# SAVE
+if [[ $button == save && $savfile && $data ]]; then
+	if [[ ${savfile:0:1} == "!" ]]; then
+		w=1
+		savefile=${savfile:1}
+	fi
+	if [[ -f $savfile && -z $w ]]; then
+		message="$savfile exists; use ! to overwrite"
+	else
+		echo "$data" > $savfile
+		message="saved"
 	fi
 fi
 
@@ -55,7 +72,7 @@ if [[ $button == runcode && $data ]]; then
 	if [[ $env ]]; then
 		export "$env"
 	fi
-	tmp=tmp.$type
+	tmp=$TEMP/tmp.$type
 	if [[ $pre ]]; then
 		echo "$pre" > $tmp 		# NOTET
 		echo "$data" >> $tmp
@@ -68,16 +85,16 @@ if [[ $button == runcode && $data ]]; then
 	fi
 	if [[ $comp ]]; then
 		diag "$bin, $tmp"
-		res=$($bin $tmp 2>err.txt)
+		res=$($bin $tmp 2>ERRF)
 	else
 		diag "$bin, $tmp [ $args ]"
-		res=$($bin $tmp $args 2>err.txt)
+		res=$($bin $tmp $args 2>ERRF)
 	fi
 	if [[ $clean ]]; then
 		unlink $tmp
 	fi
-	if [[ -s err.txt ]]; then
-		res+=$(< err.txt)
+	if [[ -s ERRF ]]; then
+		res+=$(< ERRF)
 	else
 		if [[ $comp ]]; then
 			if [[ -z $res ]]; then
@@ -88,8 +105,8 @@ if [[ $button == runcode && $data ]]; then
 			fi
 		fi
 	fi
-	if [[ -f err.txt ]]; then
-		unlink err.txt
+	if [[ -f ERRF ]]; then
+		unlink ERRF
 	fi
 
 	# EARLY OUTPUT
@@ -124,7 +141,7 @@ if [[ $button == runcode ]]; then
 	s=${Qa[@]}			# NOTED
 	s=${s//button/}			# 1
 	set_jsn_ref "$s"
-	write_jsn form.jsn
+	write_jsn $FORM
 fi
 # 1. A non-connect connect - or, a DRAT...
 
@@ -133,11 +150,11 @@ if [[ $debug ]]; then
 	diag "$POST_STRING"
 fi
 
-if [[ -f $Ef ]]; then
-	if [[ -s $Ef ]]; then
-		cat $Ef
+if [[ -f $ERRL ]]; then
+	if [[ -s $ERRL ]]; then
+		cat $ERRL
 	fi
-	rm $Ef
+	rm $ERRL
 fi
 
 exit

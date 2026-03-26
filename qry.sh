@@ -1,9 +1,9 @@
 # QRY.SH - The Query Data.
 # Part of coderun.cgi, the localhost code runner; or, Experiment in the Shell.
 # Copyright 2026 g.a.jennings
-QRY=1.1
+QRY=1.2
 
-Qa=(option data button tmpfile text below args html diag only clean)
+Qa=(option data button savfile tmpfile text below args html diag only clean)
 
 declare -A _GET
 declare -A _POST

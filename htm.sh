@@ -9,7 +9,7 @@ EOL=$'\n'
 declare -A radio
 declare -A checkbox
 declare -a select
-select=(tmp.*)
+select=($TEMP/tmp.*)
 
 # BINs to RADIOs
 function bin_radio {
@@ -95,12 +95,14 @@ htm() {
 <form method='post' action='?'>
 <textarea name='data'>$data</textarea>
 $RAD_OPTIONS<br />
-<input type='text' name='args' title='arguments to code' placeholder='arguments' value='$args' /><br />
+<input type='text' name='args' title='arguments to code' placeholder='arguments' value='$args' />
+<br />
 <select name='tmpfile' title='temporary language files'>
 $SEL_OPTIONS
 </select><br />
 <button title='load temporary file for language previously used' name='button' value='load'>load</button><br />
-<button title='load code example for selected language' name='button' value='new'>new</button>
+<button title='load code example for selected language' name='button' value='new'>new</button><br />
+<button title='save textarea' name=button value=save>save</button><input type='text' name='savfile' title='save file' value='$savfile' />
 <br style='clear:both;' />
 <button style='margin-left:0;' title='run the code for the selected language' name='button' value='runcode'>run</button>
 $BOX_OPTIONS
@@ -120,6 +122,8 @@ return
 
 The "matching" of radio (button) data and the BINs data should be done via 
 the CONFIG MAPPING MODULE (yet to be designed).
+
+P.S. Inline HTML ain't cool. *sigh*
 
 # NOTEG
 

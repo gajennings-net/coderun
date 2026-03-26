@@ -1,7 +1,6 @@
-Project CODERUNNER - Version One - 15 Mar 2026
+Project CODERUNNER - Version Two - 24 Mar 2026
 
-This is a CGI FORM for running Code. Languages supported for this first 
-release are:
+This is a CGI FORM for running Code. Languages supported include: 
 
     Bash
     PHP
@@ -11,6 +10,8 @@ release are:
     Gcc
     Lua
     Rust
+
+Others can be added at will.
 
 There are literally dozens of online code running websites. Why one more?
 
