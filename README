@@ -89,3 +89,7 @@ Included is the Colossal Debugger, "echoe":
 Which, when a bug is suspected, you pillferate the code with. When the bug is 
 found, you do a search and delete on all the Colassal Debugger calls!
 
+Known Bugs
+
+Some of the output options are no implemented. $'\n' save/restore convert to 
+real newlines.

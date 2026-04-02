@@ -17,6 +17,7 @@ checkbox[below]="output below form"
 checkbox[html]="output is HTML"
 checkbox[only]="only display output"
 checkbox[clean]="clean temp files"
+checkbox[debug]="the collossal debugger"
 
 # BINs to RADIOs
 function bin_radio {

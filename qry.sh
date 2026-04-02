@@ -3,7 +3,9 @@
 # Copyright 2026 g.a.jennings
 QRY=1.2
 
-Qa=(option data button savfile tmpfile text below args html diag only clean)
+# need to synch...
+Qa=(option data button savfile tmpfile text below args html diag only clean 
+cmdline debug)
 
 declare -A _GET
 declare -A _POST

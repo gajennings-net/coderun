@@ -1,5 +1,16 @@
 HISTORY
 
+02 Apr 2026
+
+Fixed
+
+    CODERUN.CGI $ERRF was (just) ERRF.
+
+Added
+
+    CODERUN.CGI "cmd" to exec a program into the textarea; also for this 
+    QRY.SH, HTM.SH. Also, re-arrainged some HTML controls.
+
 23 Mar 2026
 
 Fixed

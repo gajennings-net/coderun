@@ -23,7 +23,3 @@ Just place all the code somewhere nice within your LOCALHOST server's space.
 Example
 
     http://localhost/coderun/coderun.cgi
-
-Known Bugs
-
-Some of the output options are no implemented.

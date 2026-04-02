@@ -53,14 +53,13 @@ echo "<!DOCTYPE html>
 <form method='post' action='?'>
 <textarea name='data'>$data</textarea>
 $RAD_OPTIONS<br />
-<input type='text' name='args' title='arguments to code' placeholder='arguments' value='$args' />
-<br />
-<select name='tmpfile' title='temporary language files'>
+<input type='text' name='args' title='arguments to code' placeholder='arguments' value='$args' /><br />
+<button title='load code example for selected language' name='button' value='new'>new</button><br />
+<button title='load temporary file for language previously used' name='button' value='load'>load</button><select name='tmpfile' title='temporary language files'>
 $SEL_OPTIONS
 </select><br />
-<button title='load temporary file for language previously used' name='button' value='load'>load</button><br />
-<button title='load code example for selected language' name='button' value='new'>new</button><br />
-<button title='save textarea' name=button value=save>save</button><input type='text' name='savfile' title='save file' value='' />
+<button title='save textarea' name=button value=save>save</button><input type='text' name='savfile' title='save file' value='' /><br />
+<button title='exec command into textarea' name=button value=cmd>cmd</button><input type='text' name='cmdline' title='cmd line' value='$cmdline' />
 <br style='clear:both;' />
 <button style='margin-left:0;' title='run the code for the selected language' name='button' value='runcode'>run</button>
 $BOX_OPTIONS

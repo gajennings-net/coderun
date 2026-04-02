@@ -37,6 +37,17 @@ if [[ -z $button ]]; then
 	fi
 fi
 
+# CMD
+if [[ $button == cmd && $cmdline ]]; then
+	res=$($cmdline 2>$ERRF)
+	if [[ -s $ERRF ]]; then
+		res+=$(< $ERRF)
+		unlink $ERRF
+	fi
+	data=$res
+	res=""
+fi
+
 # SAVE
 if [[ $button == save && $savfile && $data ]]; then
 	if [[ ${savfile:0:1} == "!" ]]; then
@@ -86,16 +97,16 @@ if [[ $button == runcode && $data ]]; then
 	fi
 	if [[ $comp ]]; then
 		diag "$bin, $tmp"
-		res=$($bin $tmp 2>ERRF)
+		res=$($bin $tmp 2>$ERRF)
 	else
 		diag "$bin, $tmp [ $args ]"
-		res=$($bin $tmp $args 2>ERRF)
+		res=$($bin $tmp $args 2>$ERRF)
 	fi
 	if [[ $clean ]]; then
 		unlink $tmp
 	fi
-	if [[ -s ERRF ]]; then
-		res+=$(< ERRF)
+	if [[ -s $ERRF ]]; then
+		res+=$(< $ERRF)
 	else
 		if [[ $comp ]]; then
 			if [[ -z $res ]]; then
@@ -106,8 +117,8 @@ if [[ $button == runcode && $data ]]; then
 			fi
 		fi
 	fi
-	if [[ -f ERRF ]]; then
-		unlink ERRF
+	if [[ -f $ERRF ]]; then
+		unlink $ERRF
 	fi
 
 	# EARLY OUTPUT
