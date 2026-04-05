@@ -1,5 +1,7 @@
 tmp/
 form.jsn
+err.log
+err.txt
 tmp.*
 *.tmp
 *.log

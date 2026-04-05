@@ -4,6 +4,8 @@
 VER=2.4
 PROG=coderun.cgi
 FORM=form.jsn
+BINS=BINS
+CODE=CODE
 TEMP=tmp
 ERRL=err.log
 ERRF=err.txt
@@ -64,18 +66,17 @@ fi
 
 # NEW
 if [[ $button == new ]]; then
-	read_data dat.sh
+	read_data $CODE
 	data=${code[$option]}
 fi
 
 # LOAD
-if [[ $button == load ]]; then
+bin_read $BINS
+if [[ $button == load && $tmpfile ]]; then
 	data=$(< $tmpfile)
-	option=${tmpfile:4}
+	t=${tmpfile##*.}
+	bin_load $t
 fi
-
-# WHICH BIN
-bin_read
 bin_option
 bin_radio
 

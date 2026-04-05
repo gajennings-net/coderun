@@ -15,7 +15,7 @@ declare -a bins
 # MODULE API
 function bin_read {
 	local l b k v
-	exec {fd}<${BASH_SOURCE[0]}
+	exec {fd}<$1
 	while read -r -u$fd l; do
 		if [[ $l == "# DATA" ]]; then
 			break
@@ -56,6 +56,17 @@ function bin_option {
 #echo "$bin, $tmp, $name, $desc etc."
 }
 
+function bin_load {
+	local a
+	for a in ${bins[@]}; do
+		declare -n bin=$a
+		if [[ ${bin[type]} == $1 ]]; then
+			option=$a
+			break
+		fi
+	done
+}
+
 # TEST
 function bin_show {
 	local a b
@@ -93,72 +104,3 @@ return
 This contains the data (in INI-like format) for the known code running 
 programs, PHP, Bash, C, etc. Just put them here and it should work... (I 
 suppose an external file would be nice, but I don't know if it'd be better - probably. Certainly it would be the *normal* thing to do...)
-
-# DATA
-[php]
-bin "php"
-type php
-name PHP
-desc "PHP Code"
-pre "<?php "
-[sh]
-bin sh
-type sh
-name Bash
-desc "Shell script"
-[perl]
-bin perl
-type pl
-name Perl
-desc "Perl script"
-[bat]
-bin "cmd /C"
-type bat
-name Batch
-desc "Batch File"
-[ruby]
-bin ruby
-type rb
-name Ruby
-desc "Ruby Code"
-[python]
-bin python
-type py
-name Python 
-desc "Python Code"
-[lua]
-bin lua
-type lua
-name Lua
-desc "Lua Script"
-[gcc]
-bin gcc
-type c
-name C
-desc "C Code"
-comp 1
-[cpp]
-bin g++
-type cc
-name C++
-desc "C Plus Plus"
-comp 1
-[rust]
-bin rustc
-type rs
-name Rust
-desc "Rust Code"
-comp 1
-exe tmp.exe
-[go]
-bin "go run"
-type go
-name Go
-desc "Go Lang"
-pre "package main;"
-[zsh]
-bin zsh
-type zsh
-name Zsh
-desc "Z Shell"
-# END

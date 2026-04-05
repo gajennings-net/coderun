@@ -1,0 +1,69 @@
+
+# DATA
+[sh]
+bin sh
+type sh
+name Bash
+desc "Shell script"
+[php]
+bin "php"
+type php
+name PHP
+desc "PHP Code"
+pre "<?php "
+[perl]
+bin perl
+type pl
+name Perl
+desc "Perl script"
+[bat]
+bin "cmd /C"
+type bat
+name Batch
+desc "Batch File"
+[ruby]
+bin ruby
+type rb
+name Ruby
+desc "Ruby Code"
+[python]
+bin python
+type py
+name Python 
+desc "Python Code"
+[lua]
+bin lua
+type lua
+name Lua
+desc "Lua Script"
+[gcc]
+bin gcc
+type c
+name C
+desc "C Code"
+comp 1
+[cpp]
+bin g++
+type cc
+name C++
+desc "C Plus Plus"
+comp 1
+[rust]
+bin rustc
+type rs
+name Rust
+desc "Rust Code"
+comp 1
+exe tmp.exe
+[go]
+bin "go run"
+type go
+name Go
+desc "Go Lang"
+pre "package main;"
+[zsh]
+bin zsh
+type zsh
+name Zsh
+desc "Z Shell"
+# END
